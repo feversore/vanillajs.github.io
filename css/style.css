@@ -495,7 +495,8 @@ div[class^="widget-item"] > span {
   .user-info,
   .quote-box,
   .todo-form,
-  .todo-list {
+  .todo-list,
+  .quote-box {
     width: 100%    
   }
 }
