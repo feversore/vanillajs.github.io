@@ -57,6 +57,6 @@ console.log(thumbImg);
 
 container.style.backgroundImage = `linear-gradient(to bottom, ${bgColor1} 0%, ${bgColor2} 50%, ${bgColor3} 100%)`;
 
-watch.style.backgroundImage = `url(../vanillajs.github.io/images/${thumbImg})`;
+// watch.style.backgroundImage = `url(../vanillajs.github.io/images/${thumbImg})`;
 
 // thumb.style.backgroundImage = `linear-gradient(#fff, #fff), linear-gradient(to right, ${bgColor1} 0%, ${bgColor2} 80%, ${bgColor3} 100%)`;
