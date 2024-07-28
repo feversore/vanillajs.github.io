@@ -282,7 +282,7 @@ input:focus {
 }
 .todo-list ul li .todo-text {
   position: relative;
-  width: auto;
+  max-width: calc(100% - 24px);
   padding-left: 22px;
   overflow: hidden;
   white-space: nowrap;
@@ -319,6 +319,7 @@ input:focus {
   border-radius: 100%;
   transform: rotate(45deg);
   box-sizing: border-box;
+  flex-shrink: 1;
 }
 .todo-list .btn-del:before,
 .todo-list .btn-del:after {
