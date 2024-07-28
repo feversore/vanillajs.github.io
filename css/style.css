@@ -74,6 +74,7 @@ input {
   padding: 6px 12px;
   border: 1px solid var(--col_gray40);
   border-radius: 6px;
+  font-size: 14px;
   box-sizing: border-box;
 }
 input:placeholder {
