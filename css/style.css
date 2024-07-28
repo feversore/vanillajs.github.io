@@ -101,7 +101,7 @@ input:focus {
   width: 100vw;
   height: 100vh;
   margin: 0;
-  background: rgba(0, 0, 0, 0.8);  
+  background: rgba(0, 0, 0, 0.8);
   -webkit-backdrop-filter: saturate(180%) blur(10px); /* For Safari */
   backdrop-filter: blur(10px);
   z-index: 100;
