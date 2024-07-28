@@ -1,0 +1,496 @@
+@import url("https://cdnjs.cloudflare.com/ajax/libs/reseter.css/2.0.0/reseter.min.css");
+@import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css");
+@import url('https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300');
+@import url('https://cdnjs.cloudflare.com/ajax/libs/weather-icons/2.0.9/css/weather-icons.min.css');
+
+/* common */
+:root {
+  --col_black: #000;
+  --col_white: #fff;
+  --col_red: #f00;
+  --col_orange: #FFA500;
+  --col_grayline: #EEEEEE;
+  --col_grayline2: #F2F5F9;
+  --col_gray10: #F8F8F8;
+  --col_gray30: #E5E5E5;
+  --col_gray40: #D3D3D3;
+  --col_gray50: #B1B1B0;
+  --col_gray60: #999898;
+  --col_gray70: #7E7E7D;
+  --col_gray80: #626261;
+  --col_gray90: #302c2c;
+  --col_gray100: #222222;
+  --col_txtGrey: #CDD5C1;
+  --col_dawn1: #123352;
+  --col_dawn2: #1d5372;
+  --col_dawn3: #3885a2;
+  --col_morning1: #8dcdba;
+  --col_morning2: #eee07a;
+  --col_morning3: #f0eebc;
+  --col_afternoon1: #e6756f;
+  --col_afternoon2: #ee8049;
+  --col_afternoon3: #facf62;
+  --col_evening1: #291c6b;
+  --col_evening2: #4a257d;
+  --col_evening3: #884186;
+  --col_night1: #111642;
+  --col_night2: #011548;
+}
+html, body {
+  font-family: "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto, "Helvetica Neue", "Segoe UI", "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
+  color: var(--col_gray100);
+  font-size: 14px;
+  line-height: 150%;
+}
+html, body {
+  height: 100%;
+}
+ul,
+li {
+  list-style: none;
+}
+a {
+  text-decoration: none;
+}
+.hidden {
+  display: none !important;
+}
+.blind {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0,0,0,0);
+  border: 0;
+}
+input {
+  width: 100%;
+  height: 40px;
+  padding: 6px 12px;
+  border: 1px solid var(--col_gray40);
+  border-radius: 6px;
+  box-sizing: border-box;
+}
+input:placeholder {
+  color: #ddd;
+}
+input:focus {
+  border: 2px solid #222;
+}
+.layer-alert {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100%;
+  z-index: 200;  
+}
+.layer-alert.open {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.layer-alert .dimmed {
+  overflow: hidden;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  margin: 0;
+  background: rgba(0, 0, 0, 0.8);
+  backdrop-filter: blur(5px);
+  z-index: 100;
+}
+.layer-alert-container {
+  position: relative;
+  width: 100vw;
+  max-width: 300px;
+  min-width: 300px;
+  height: auto;
+  max-height: 70%;
+  border-radius: 6px;
+  padding: 20px 16px;
+  background: var(--col_white);
+  z-index: 201;
+  box-sizing: border-box;
+}
+.layer-alert-title {
+  margin-bottom: 20px;
+  font-size: 18px;
+  text-align: center;
+}
+/* 레이아웃 */
+.container {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  min-height: 100%;
+}
+.content {
+  position: relative;
+  width: 460px;
+  height: 100%;
+  margin: 0 auto;
+  padding: 40px;
+  display: flex;
+  flex-direction: column;  
+  align-items: center;
+  gap: 10px;
+  background-color: rgb(255,255,255, 0.7);
+  box-sizing: border-box;
+}
+/* 로그인폼 */
+.login-form {  
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.login-form > :not([hidden]) ~ :not([hidden]) {
+  --tw-space-y-reverse: 0;
+  margin-top: calc(24px * calc(1 - var(--tw-space-y-reverse)));
+  margin-bottom: calc(24px * var(--tw-space-y-reverse));
+}
+.login-form label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: 500;
+}
+.login-form button {
+  width: 100%;
+  height: 40px;
+  border: 0;
+  background-color: var(--col_evening1);
+  border-radius: 6px;
+  color: var(--col_white);
+  font-size: 13px;
+  font-weight: 600;
+  box-sizing: border-box;
+}
+/* 사용자 */
+.user-info {
+  width: 350px;
+  display: flex;
+  /* justify-content: center; */
+  margin-bottom: 20px;
+  gap: 10px;
+}
+.user-thumb {
+  overflow: hidden;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 90px;
+  height: 90px;
+  border: 4px solid transparent;
+  border-radius: 50%;
+  background-image: linear-gradient(#fff, #fff), 
+  linear-gradient(to right, var(--col_red) 0%, var(--col_orange) 100%);
+  background-origin: border-box;
+  background-clip: content-box, border-box;
+}
+.user-thumb img {
+  display: inline-block;
+  min-width: 100%;
+  min-height: 100%;
+  -ms-interpolation-mode: bicubic;
+  border-radius: 100%;
+}
+.user-name {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 15px;
+}
+.user-name .nick {
+  margin: 0;
+  padding: 0;
+  font-size: 24px;
+  font-weight: 700;
+}
+
+/* 랜덤텍스트 */
+.quote-box {
+  max-width: 350px;
+  margin-top: 18px;
+}
+.quote-box figure {  
+}
+.quote-box figure blockquote {
+  padding: 10px 14px;
+  border-left: 5px solid var(--col_night2);
+}
+.quote-box .quote {
+  font-size: 16px;
+  font-weight: 500;
+  word-break: keep-all;
+}
+.quote-box figcaption {
+  padding-right: 20px;
+  text-align: right;
+}
+.quote-box .author {
+  font-size: 13px;
+}
+
+
+/* 할일목록 */
+.todo-form {
+  width: 350px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.todo-form h2 {
+  font-size: 18px;
+  font-weight: 600;
+}
+.todo-list {
+  width: 350px;  
+}
+.todo-list ul {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin: 0;
+  background: #fff;
+  border-radius: 8px;
+  padding: 20px;
+}
+.todo-list ul li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 5px;
+  max-width: 100%;  
+  padding: 8px 10px;
+  text-align: left;
+  border: 1px solid var(--col_gray30);
+  border-radius: 8px;
+}
+.todo-list ul li .todo-text {
+  position: relative;
+  width: auto;
+  padding-left: 22px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+.todo-list ul li .todo-text:before,
+.todo-list ul li .todo-text:after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  display: block;
+  border-radius: 2px;
+  background-color: var(--col_afternoon1);
+}
+.todo-list ul li .todo-text:before {
+  left: 6px;
+  width: 2px;
+  height: 7px;
+  transform: rotate(-45deg) translateX(-50%) translateY(-50%);
+}
+.todo-list ul li .todo-text:after {
+  left: 5px;
+  width: 2px;
+  height: 12px;
+  margin-top: -1px;
+  transform: rotate(35deg) translateX(-50%) translateY(-50%);
+}
+.todo-list .btn-del {
+  position: relative;
+  width: 18px;
+  height: 18px;
+  border: 1px solid var(--col_gray40);
+  border-radius: 100%;
+  transform: rotate(45deg);
+  box-sizing: border-box;
+}
+.todo-list .btn-del:before,
+.todo-list .btn-del:after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  display: block;
+  border-radius: 2px;
+  background-color: var(--col_gray60);
+}
+.todo-list .btn-del:before {
+  width: 2px;
+  height: 10px;
+  transform: translateX(-50%) translateY(-50%);
+}
+.todo-list .btn-del:after {
+  width: 10px;
+  height: 2px;
+  transform: translateX(-50%) translateY(-50%);
+}
+
+
+div[class^="widget-item"] {
+  z-index: 2;
+}
+div[class^="widget-item"] > span {
+  color: var(--col_black);
+}
+.widget {
+  width: 100%;
+  /* padding-top: 15px; */
+  margin-bottom: 12px;
+}
+.widget .inner {
+}
+.widget .widget-item {
+  text-align: center;
+}
+.widget .date span {
+  font-size: 24px;
+}
+.widget .clock {
+  line-height: normal;
+}
+.widget .clock span {
+  font-size: 45px;
+}
+.widget .weather {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  display: flex;
+  justify-content: flex-end;
+  align-items: baseline;
+  gap: 5px;
+  padding: 0 5px 0 10px;
+  background-color: var(--col_dawn3);
+  border-radius: 5px;
+}
+.widget .weather span {
+  font-family: "Open Sans Condensed", sans-serif;
+  color: var(--col_white);
+}
+/* .widget .weather .city {
+  font-size: 28px;
+} */
+.widget .weather .decs {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* font-size: 20px; */
+}
+.widget .weather img {
+  width: 30px;
+  max-width: 30px;
+}
+.watch {
+  position: absolute;
+  top: 50%;
+  right: 0;  
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 150px;
+  height: 170px;
+  padding: 5px;
+  border-radius: 25px;
+  background-color: var(--col_gray90); /*바깥테두리*/
+  box-sizing: border-box;
+  z-index: 200;
+  transform: translateY(-50%);
+}
+.watch-face {
+  width: 100%;
+  height: 100%;
+  padding: 10px;
+  border: 3px solid #333;
+  background-color: #000;
+  border-radius: 20px;
+  box-sizing: border-box;
+}
+.watch-face-inner {
+  overflow: hidden;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  padding: 5px 10px;
+  background-size: cover;
+  background-position: center;
+  border-radius: 15px;
+  box-sizing: border-box;
+}
+.watch-face-inner:before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgb(255,255,255, 0.4);
+  z-index: 1;
+}
+/* 날짜 */
+.watch .date span {
+  font-weight: 700;  
+}
+/* 시간 */
+.watch .clock {
+  margin-top: -2px;
+}
+.watch .clock .time {  
+  font-size: 20px;
+  font-weight: 700;
+}
+/* 날씨 */
+.watch .weather {
+  max-width: 95px;
+  /* margin-top: 5px; */
+  position: absolute;
+  left: 10px;
+  bottom: 5px;
+  width: 100%;
+}
+.watch .weather img {
+  width: 30px;
+  max-width: 30px;
+}
+.watch .weather span {
+  display: block;
+  font-family: "Open Sans Condensed", sans-serif;  
+  line-height: 14px;
+}
+.watch .weather .city {
+  font-size: 18px;
+  text-transform: uppercase;
+}
+.watch .weather .decs {
+  display: flex;
+  align-items: center;
+}
+/* .ms-auto {
+  margin-inline-start: auto;
+} */
+
+/* @media (min-width: 576px) { ... } */
+@media screen and (max-width:767px){ 
+  .content {
+    width: 100%;
+  }
+  .widget {
+    margin: 20px 0;
+  }
+  .user-info,
+  .quote-box,
+  .todo-form,
+  .todo-list {
+    width: 100%    
+  }
+}

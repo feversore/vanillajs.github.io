@@ -4,13 +4,99 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>바닐라 JS 챌린지 마지막 과제</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../vanillajs.github.io/css/style.css">
 </head>
 <body>
-  <h1 class="text-3xl font-bold underline">
-    Hello world!
-  </h1>
-  <script src="../js/login.js"></script>
+  <section class="container">
+    <!-- 본문 -->
+    <div class="content">
+      <!-- date -->
+      <div class="widget">
+        <div class="inner">
+          <!-- date -->
+          <div class="widget-item date">
+          </div>
+          <!-- time -->
+          <div class="widget-item clock">
+          </div>
+          <!-- weather -->
+          <div class="widget-item weather">
+          </div>
+        </div>
+      </div>
+      
+      <!-- user info -->
+      <div class="user-info hidden">
+        <div class="user-thumb">
+          <!-- <img src="../vanillajs.github.io/images/IMG_9414.JPG" alt=""/> -->
+        </div>
+        <div class="user-name">
+          <h1 class="nick">닉네임</h1>
+        </div>
+      </div>
+  
+      <!-- todo input -->
+      <form id="todo-form" class="todo-form">
+        <h2>할일 목록</h2>
+        <input type="input" id="todoInput" title="할일 목록" placeholder="할일을 입력하세요" required>
+      </form>
+  
+      <!-- todo lists -->
+      <div id="todo-list" class="todo-list hidden">
+      </div>
+      
+      <!-- quites -->
+      <div class="quote-box">
+        <figure>
+          <blockquote>
+              <p class="quote"></p>
+          </blockquote>
+          <figcaption>
+            <cite class="author"></cite>
+          </figcaption>
+        </figure>
+      </div>
+    </div>
+
+    <!-- 
+    <div class="watch">
+      <div class="watch-face">
+        <div class="watch-face-inner">
+          <div class="widget date">
+          </div>
+          <div class="widget clock">
+          </div>
+          <div class="widget weather">
+          </div>
+        </div>
+      </div>
+    </div>
+     -->
+  </section>
+
+  <!-- login layer -->
+  <div class="layer-alert" id="layer-alert">
+    <div class="layer-alert-container">
+      <h1 class="layer-alert-title">바로 로그인 하세요</h1>
+      <form id="login-form" class="login-form">
+        <div>
+          <label for="login">닉네임</label>
+          <input type="input" id="login" maxlength="15" placeholder="닉네임을 입력해주세요" required>
+        </div>
+        <div>
+          <button type="submit">확인</button>
+        </div>
+      </form>
+    </div>
+    <div class="dimmed"></div>      
+  </div>
+
+  <script src="../vanillajs.github.io/js/weather.js"></script>
+  <script src="../vanillajs.github.io/js/clock.js"></script>
+  <script src="../vanillajs.github.io/js/background.js"></script>
+  <script src="../vanillajs.github.io/js/quotes.js"></script>
+  <script src="../vanillajs.github.io/js/login.js"></script>
+  <script src="../vanillajs.github.io/js/todo.js"></script>
+
 </body>
 </html>
