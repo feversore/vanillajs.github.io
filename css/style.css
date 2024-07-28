@@ -222,6 +222,7 @@ input:focus {
 .quote-box {
   max-width: 350px;
   margin-top: 18px;
+  padding: 0 20px;
 }
 .quote-box figure {  
 }
@@ -497,6 +498,9 @@ div[class^="widget-item"] > span {
   .todo-form,
   .todo-list,
   .quote-box {
-    width: 100%    
+    width: 100%;
+  }
+  .quote-box {
+    max-width: 100%;
   }
 }
