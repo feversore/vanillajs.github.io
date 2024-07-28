@@ -1,3 +1,5 @@
+
+const containerFixed = document.getElementById('container');
 const layer = document.getElementById('layer-alert');
 
 const loginForm = document.getElementById('login-form');
@@ -7,6 +9,7 @@ const frmButton = loginForm.querySelector('button');
 const userInfo = document.querySelector('.user-info');
 const userName = userInfo.querySelector('.nick');
 
+const FIXED_CLASS = 'fixed';
 const HIDDEN_CLASS = 'hidden';
 const OPEN_CLASS = 'open';
 const USER_KEY = 'username'
@@ -32,6 +35,7 @@ if(saveUsername !== null) {
   loginForm.classList.add(HIDDEN_CLASS);
   showUserInfo(saveUsername);
 } else {
+  containerFixed.classList.add(FIXED_CLASS)
   layer.classList.add(OPEN_CLASS);
   loginForm.classList.remove(HIDDEN_CLASS);
   userInfo.classList.add(HIDDEN_CLASS);
